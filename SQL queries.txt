@@ -1,0 +1,77 @@
+/*Query 1 - Create a query that lists each movie, 
+the film category it is classified in, 
+and the number of times it has been rented out.1*/
+SELECT f.title movie, c.name category_name, COUNT(r.*) rental_count
+FROM category c
+JOIN film_category fc
+ON c.category_id = fc.category_id
+JOIN film f
+ON fc.film_id = f.film_id
+JOIN inventory i
+ON f.film_id = i.film_id
+JOIN rental r
+ON i.inventory_id = r. inventory_id
+WHERE c.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')
+GROUP BY 1,2
+ORDER BY 2,1;
+
+
+
+/*Query 2 - Create a query that lists each movie, 
+the film category it is classified in, 
+and the number of times it has been rented out.*/
+SELECT f.title movie, c.name category_name, COUNT(r.*) rental_count
+FROM category c
+JOIN film_category fc
+ON c.category_id = fc.category_id
+JOIN film f
+ON fc.film_id = f.film_id
+JOIN inventory i
+ON f.film_id = i.film_id
+JOIN rental r
+ON i.inventory_id = r. inventory_id
+WHERE c.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')
+GROUP BY 1,2
+ORDER BY 2,1;
+
+
+
+
+
+/*Query 3 - Finally, provide a table with the family-friendly film category,
+ each of the quartiles, and the corresponding count of movies within
+ each combination of film category for each corresponding rental duration category.
+ The resulting table should have three columns: Category, Rental length category,
+ Count*/
+SELECT category_name, quartiles, COUNT(*)
+FROM (
+	 SELECT f.title movie, c.name category_name, f.rental_duration,
+			NTILE(4) OVER(ORDER BY f.rental_duration) quartiles
+	 FROM category c
+	 JOIN film_category fc
+	 ON c.category_id = fc.category_id
+	 JOIN film f
+	 ON fc.film_id = f.film_id
+	 WHERE c.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')) sub
+GROUP BY 1,2
+ORDER BY 1,2;
+
+
+
+
+
+
+/*Query 4 - We want to find out how the two stores compare in their count of rental orders
+during every month for all the years we have data for. Write a query that returns
+the store ID for the store, the year and month and the number of rental orders each 
+store has fulfilled for that month. Your table should include a column for each of the
+following: year, month, store ID and count of rental orders fulfilled during that month.*/
+SELECT EXTRACT(MONTH FROM r.rental_date) rental_month, EXTRACT(YEAR FROM r.rental_date) rental_year, 
+	   s.store_id, COUNT(r.rental_id) count_rental
+FROM rental r
+JOIN staff st
+ON r.staff_id = st.staff_id
+JOIN store s
+ON st.store_id = s.store_id
+GROUP BY 1,2, 3
+ORDER BY 4 DESC;
