@@ -2,7 +2,7 @@
 
 ## DVD Rental ER Diagram
 
-[![DVD Rental ER Diagram](DVD%20RENTAL%20ER%20DIAGRAM%20.PNG)](https://app.powerbi.com/links/PeIUCet0Jo?ctid=f419c9fe-f7b0-4d87-bee8-e8dfb2190cab&pbi_source=linkShare)
+[![DVD Rental ER Diagram](DVD%20RENTAL%20ER%20DIAGRAM%20.jpg)](https://app.powerbi.com/links/PeIUCet0Jo?ctid=f419c9fe-f7b0-4d87-bee8-e8dfb2190cab&pbi_source=linkShare)
 
 **[View my Power BI dashboard](https://app.powerbi.com/links/PeIUCet0Jo?ctid=f419c9fe-f7b0-4d87-bee8-e8dfb2190cab&pbi_source=linkShare)**
 
